@@ -10,5 +10,12 @@ bot.on('shardReady', () => {
     .catch(console.error);
 });
 
+bot.on('message', message => {
+  if (RegExp(`^<@${bot.user.id}>`).test(message)) {
+    message.channel.send(`No. ${Number(bot.options.shards) + 1} shard received a mention.`)
+      .catch(console.error);
+  }
+});
+
 bot.login(process.env.SHARD_EXPERIMENT_TOKEN)
   .catch(console.error);
